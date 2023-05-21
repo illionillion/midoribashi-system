@@ -1,0 +1,36 @@
+/www/html/db-txt/form-data.csv
+
+# 必要のない一時ファイルやディレクトリ
+/.idea
+/.vscode
+.DS_Store
+.env
+.phpunit.result.cache
+/vendor
+/node_modules
+/log
+/cache
+/mysql
+
+# composer.lock ファイルは必要です
+!/composer.lock
+
+# ログやキャッシュの例外
+!/log/.gitkeep
+!/cache/.gitkeep
+
+
+# MySQL関連のファイル
+*.sql
+*.dump
+*.gz
+*.zip
+*.tar
+*.rar
+/data
+/log
+/ib_logfile*
+/*.pid
+
+# テーブル作成用のSQL
+!/contact_db.sql
