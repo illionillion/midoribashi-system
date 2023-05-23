@@ -1,0 +1,37 @@
+/* Header styles */
+header {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.service-name {
+    font-weight: bold;
+}
+
+.navigation-bar {
+    text-align: center;
+}
+
+.login-logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.account-icon {
+    margin-left: 10px;
+}
