@@ -13,11 +13,6 @@
 </head>
 
 <body>
-    <?php
-    // $header = new HeaderComponent('緑橋書店システム');
-    // $header->render();
-    ?>
-
 
     <main>
         <div class="container">
@@ -32,7 +27,6 @@
                         <label for="password">パスワード</label>
                         <input type="password" id="password" name="password" required>
                     </div>
-                    <p><a href="./signup.php">従業員情報を登録する</a></p>
                     <input type="submit" value="ログイン">
                 </form>
             </div>

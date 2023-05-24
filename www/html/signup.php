@@ -18,26 +18,26 @@
         <div class="container">
             <div class="login-form">
                 <h2>従業員登録画面</h2>
-                <form action="/" method="POST">
+                <form action="./api/register.php" method="POST">
                     <div class="form-group">
                         <label for="employee-id">従業員ID</label>
-                        <input type="text" id="employee-id" name="employee-id" required>
+                        <input type="text" minlength="6" pattern="^[a-zA-Z0-9]+$" id="employee-id" name="employee-id" required>
                     </div>
                     <div class="form-group">
                         <label for="employee-name">従業員名</label>
-                        <input type="text" id="employee-name" name="employee-name" required>
+                        <input type="text" minlength="2" id="employee-name" name="employee-name" required>
                     </div>
                     <div class="form-group">
                         <label for="employee-tel">電話番号</label>
-                        <input type="text" id="employee-tel" name="employee-tel" required>
+                        <input type="tel" pattern="\d{2,4}-?\d{2,4}-?\d{3,4}" id="employee-tel" name="employee-tel" required>
                     </div>
                     <div class="form-group">
                         <label for="employee-email">メール</label>
-                        <input type="text" id="employee-email" name="employee-email" required>
+                        <input type="email" id="employee-email" name="employee-email" required>
                     </div>
                     <div class="form-group">
                         <label for="employee-password">パスワード</label>
-                        <input type="password" id="employee-password" name="employee-password" required>
+                        <input type="password" minlength="6" maxlength="12" id="employee-password" name="employee-password" required>
                     </div>
                     <p><a href="./login.php">登録済みの場合はこちら</a></p>
                     <input type="submit" value="登録">
