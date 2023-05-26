@@ -8,6 +8,6 @@
     <div class="login-logout">
         <!-- <img src="account-icon.png" alt="Account Icon" class="account-icon"> -->
         <input type="button" class="btn btn-primary" value="従業員情報" />
-        <input type="button" class="btn btn-primary" value="ログアウト" />
+        <a href="/api/logout.php" class="btn btn-primary">ログアウト</a>
     </div>
 </header>

@@ -18,14 +18,14 @@
         <div class="container">
             <div class="login-form">
                 <h2>ログイン画面</h2>
-                <form action="/" method="POST">
+                <form action="/api/auth.php" method="POST">
                     <div class="form-group">
-                        <label for="login-id">ログインID</label>
-                        <input type="text" id="login-id" name="login-id" required>
+                        <label for="employee-id">ログインID</label>
+                        <input type="text" id="employee-id" name="employee-id" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">パスワード</label>
-                        <input type="password" id="password" name="password" required>
+                        <label for="employee-password">パスワード</label>
+                        <input type="password" id="employee-password" name="employee-password" required>
                     </div>
                     <input type="submit" value="ログイン">
                 </form>

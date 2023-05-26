@@ -1,4 +1,7 @@
-<?php include './components/importComponents.php' ?>
+<?php 
+include './components/importComponents.php';
+include './api/session_check.php';
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,12 +28,12 @@
         <div class="container">
             
             <div class="search-header">
-                <h1 class="heading">注文一覧</h1>
+                <h1 ">注文一覧</h1>
                 <div class="search-box">
                     <input type="search" class="search-input" placeholder="Search...">
                     <input type="submit" value="検索" class="btn btn-primary" />
+                    <a class="create-button btn btn-primary" href="/order-create.php">注文書作成</a>
                 </div>
-                <!-- <button class="create-button">Create</button> -->
             </div>
 
             <table>

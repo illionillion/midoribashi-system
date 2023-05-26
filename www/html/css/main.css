@@ -24,7 +24,7 @@ main {
 
 .create-button {
     float: right;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     background-color: #333;
     color: white;
     border: none;
