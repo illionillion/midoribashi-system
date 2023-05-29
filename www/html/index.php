@@ -28,7 +28,7 @@ include './api/session_check.php';
         <div class="container">
             
             <div class="search-header">
-                <h1 ">注文一覧</h1>
+                <h1>注文一覧</h1>
                 <div class="search-box">
                     <input type="search" class="search-input" placeholder="Search...">
                     <input type="submit" value="検索" class="btn btn-primary" />

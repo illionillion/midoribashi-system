@@ -17,11 +17,12 @@ $employeeName = $_POST['employee-name'];
 $phoneNumber = $_POST['employee-tel'];
 $email = $_POST['employee-email'];
 $password = $_POST['employee-password'];
+$authority = $_POST['employee-authority'];
 
 // INSERT文の実行
 try {
-    $stmt = $pdo->prepare("INSERT INTO employees (employee_id, employee_name, phone_number, email, password) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$employeeId, $employeeName, $phoneNumber, $email, $password]);
+    $stmt = $pdo->prepare("INSERT INTO employees (employee_id, employee_name, phone_number, email, password, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$employeeId, $employeeName, $phoneNumber, $email, $password, $authority]);
 
     // 成功した場合の処理（例: メッセージを表示）
     // echo "従業員データを正常に登録しました。";

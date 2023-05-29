@@ -15,6 +15,52 @@ include './api/session_check.php';
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/header.css">
+    <style>
+        .right {
+            font-size: 24px;
+        }
+
+        form {
+            justify-content: space-between;
+        }
+
+        #table-contents {
+            padding: 60px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 23px;
+
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+        }
+        .total-amount {
+            /* text-decoration: underline; */
+            border-bottom: 1px solid #000;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+    <script>
+        window.addEventListener('load', ()=>{
+            document.getElementById("add-row-button").addEventListener("click", () => {
+                // テンプレコピー
+                // template要素を取得
+                const template = document.getElementById('table-row-template');
+
+                // template要素の内容を複製
+                const clone = template.content.cloneNode(true);
+
+                console.dir(clone)
+
+                // div(id="container")の中に追加
+                document.getElementById('table-body').appendChild(clone);
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -27,10 +73,10 @@ include './api/session_check.php';
     <main>
         <div class="container">
             
-            <div id="header-contents">
+            <section id="header-contents">
                 <h1>注文書作成</h1>
-                <form action="/" method="post">
-                    <section class="left">
+                <form action="/" method="post" class="d-flex">
+                    <section class="left d-flex flex-column gap-3">
                         <section class="left-head d-flex gap-3">
                             <section class="form-group d-flex flex-1 justify-content-center align-items-center">
                                 <label for="customer-name" class="form-label w-25">
@@ -47,48 +93,59 @@ include './api/session_check.php';
                             </section>
                         </section>
                         <section class="left-bottom">
-                            <section class="form-group">
+                            <section class="form-group d-flex gap-3">
                                 <label for="remarks" class="form-label">
                                     <span class="label-text">備考</span>
                                 </label>
-                                <textarea name="remarks" id="remarks" class="form-control"></textarea>
+                                <textarea name="remarks" id="remarks" class="form-control w-75"></textarea>
                             </section>
                         </section>
                     </section>
-                    <section class="right"></section>
+                    <section class="right">
+                        <a href="/" class="btn btn-secondary py-2 px-5">破棄</a>
+                        <input type="submit" value="作成" class="btn btn-success py-2 px-5">
+                    </section>
+                    <input type="hidden" name="table-data">
                 </form>
-            </div>
+            </section>
 
-            <table>
-                <thead>
+            <section id="table-contents">
+                <section class="table-controls">
+                    <div class="buttons">
+                        <input type="button" value="行追加" id="add-row-button" class="btn btn-success py-2 px-5">
+                        <input type="button" value="削除" id="remove-row-button" class="btn btn-danger py-2 px-5">
+                    </div>
+                    <div class="total-amount">
+                        <span>合計金額</span>
+                        <span>　　　　　　　　</span>
+                        <span>円</span>
+                    </div>
+                </section>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>商品ID</th>
+                            <th>書籍名</th>
+                            <th>数量</th>
+                            <th>単価</th>
+                            <th>適用</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+                <template id="table-row-template">
                     <tr>
-                        <th>注文ID</th>
-                        <th>顧客名</th>
-                        <th>作成日</th>
-                        <th>登録者</th>
+                        <th>1</th>
+                        <th><input type="text" class="book-name form-control" placeholder="書籍名"></th>
+                        <th><input type="number" class="book-count form-control" min="1" placeholder="数量"></th>
+                        <th><input type="number" class="book-unit-price form-control" placeholder="単価"></th>
+                        <th><input type="text" class="book-application form-control" placeholder="適用"></th>
+                        <th><input type="checkbox" class="book-checkbox"></th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
-                        <td>Data 4</td>
-                    </tr>
-                    <tr>
-                        <td>Data 5</td>
-                        <td>Data 6</td>
-                        <td>Data 7</td>
-                        <td>Data 8</td>
-                    </tr>
-                    <tr>
-                        <td>Data 9</td>
-                        <td>Data 10</td>
-                        <td>Data 11</td>
-                        <td>Data 12</td>
-                    </tr>
-                </tbody>
-            </table>
+                </template>
+            </section>
         </div>
     </main>
 </body>
