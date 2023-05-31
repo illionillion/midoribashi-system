@@ -36,31 +36,14 @@ include './api/session_check.php';
             display: flex;
             justify-content: space-between;
         }
-        .total-amount {
+        .total-amount-view {
             /* text-decoration: underline; */
             border-bottom: 1px solid #000;
             display: flex;
             align-items: center;
         }
     </style>
-
-    <script>
-        window.addEventListener('load', ()=>{
-            document.getElementById("add-row-button").addEventListener("click", () => {
-                // テンプレコピー
-                // template要素を取得
-                const template = document.getElementById('table-row-template');
-
-                // template要素の内容を複製
-                const clone = template.content.cloneNode(true);
-
-                console.dir(clone)
-
-                // div(id="container")の中に追加
-                document.getElementById('table-body').appendChild(clone);
-            })
-        })
-    </script>
+    <script src="/js/order-create.js"></script>
 </head>
 
 <body>
@@ -105,7 +88,9 @@ include './api/session_check.php';
                         <a href="/" class="btn btn-secondary py-2 px-5">破棄</a>
                         <input type="submit" value="作成" class="btn btn-success py-2 px-5">
                     </section>
-                    <input type="hidden" name="table-data">
+                    <input type="hidden" name="table-data" id="table-data">
+                    <input type="hidden" name="user-id" id="user-id">
+                    <input type="hidden" name="total-amount" id="total-amount">
                 </form>
             </section>
 
@@ -115,7 +100,7 @@ include './api/session_check.php';
                         <input type="button" value="行追加" id="add-row-button" class="btn btn-success py-2 px-5">
                         <input type="button" value="削除" id="remove-row-button" class="btn btn-danger py-2 px-5">
                     </div>
-                    <div class="total-amount">
+                    <div class="total-amount-view">
                         <span>合計金額</span>
                         <span>　　　　　　　　</span>
                         <span>円</span>
@@ -137,12 +122,12 @@ include './api/session_check.php';
                 </table>
                 <template id="table-row-template">
                     <tr>
-                        <th>1</th>
-                        <th><input type="text" class="book-name form-control" placeholder="書籍名"></th>
-                        <th><input type="number" class="book-count form-control" min="1" placeholder="数量"></th>
-                        <th><input type="number" class="book-unit-price form-control" placeholder="単価"></th>
-                        <th><input type="text" class="book-application form-control" placeholder="適用"></th>
-                        <th><input type="checkbox" class="book-checkbox"></th>
+                        <td>0</td>
+                        <td><input type="text" data-row-num="" data-col="name" class="form-control" placeholder="書籍名"></td>
+                        <td><input type="number" data-row-num="" data-col="count" class="form-control" min="1" value="1" placeholder="数量"></td>
+                        <td><input type="number" data-row-num="" data-col="unit-price" class=" form-control" min="0" value="0" placeholder="単価"></td>
+                        <td><input type="text" data-row-num="" data-col="application" class="form-control" placeholder="適用"></td>
+                        <td><input type="checkbox" data-row-num="" data-col="checkbox" class=""></td>
                     </tr>
                 </template>
             </section>
