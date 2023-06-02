@@ -25,8 +25,9 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
     environment:
-      # MYSQL_ROOT_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: secret
+      # MYSQL_ROOT_PASSWORD: 
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -34,7 +35,7 @@ services:
       - PMA_ARBITRARY=1
       - PMA_HOST=db #mysqlサービス名を指定
       # - PMA_USER=root # なぜかコメントアウトしたらWindowsでphpMyAdminに接続できた
-      # - PMA_PASSWORD=secret
+      # - PMA_PASSWORD="secret"
     ports:
       - 8888:80
     depends_on:
