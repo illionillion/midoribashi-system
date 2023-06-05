@@ -41,6 +41,8 @@ include './api/session_check.php';
             border-bottom: 1px solid #000;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            width: 10%;
         }
     </style>
     <script src="/js/order-create.js"></script>
@@ -58,7 +60,7 @@ include './api/session_check.php';
             
             <section id="header-contents">
                 <h1>注文書作成</h1>
-                <form action="/" method="post" class="d-flex">
+                <form action="/api/order-create.php" method="post" class="d-flex">
                     <section class="left d-flex flex-column gap-3">
                         <section class="left-head d-flex gap-3">
                             <section class="form-group d-flex flex-1 justify-content-center align-items-center">
@@ -85,11 +87,10 @@ include './api/session_check.php';
                         </section>
                     </section>
                     <section class="right">
-                        <a href="/" class="btn btn-secondary py-2 px-5">破棄</a>
-                        <input type="submit" value="作成" class="btn btn-success py-2 px-5">
+                        <a href="/" id="form-cancel" class="btn btn-secondary py-2 px-5">破棄</a>
+                        <input type="submit" id="form-submit" value="作成" class="btn btn-success py-2 px-5">
                     </section>
                     <input type="hidden" name="table-data" id="table-data">
-                    <input type="hidden" name="user-id" id="user-id">
                     <input type="hidden" name="total-amount" id="total-amount">
                 </form>
             </section>
@@ -102,7 +103,7 @@ include './api/session_check.php';
                     </div>
                     <div class="total-amount-view">
                         <span>合計金額</span>
-                        <span>　　　　　　　　</span>
+                        <span>0</span>
                         <span>円</span>
                     </div>
                 </section>

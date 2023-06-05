@@ -1,6 +1,21 @@
 <?php 
 include './components/importComponents.php';
+include './api/connect_db.php';
 include './api/session_check.php';
+
+// SELECT文の実行
+try {
+    $stmt = $pdo->prepare("SELECT order_id, customer_name, create_date, employee_id FROM orders");
+    $stmt->execute();
+  
+    // 結果の取得
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+  } catch (PDOException $e) {
+    // エラーが発生した場合の処理
+    die("データの取得に失敗しました: " . $e->getMessage());
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -46,24 +61,14 @@ include './api/session_check.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
-                        <td>Data 4</td>
-                    </tr>
-                    <tr>
-                        <td>Data 5</td>
-                        <td>Data 6</td>
-                        <td>Data 7</td>
-                        <td>Data 8</td>
-                    </tr>
-                    <tr>
-                        <td>Data 9</td>
-                        <td>Data 10</td>
-                        <td>Data 11</td>
-                        <td>Data 12</td>
-                    </tr>
+                    <?php foreach ($results as $row) :?>
+                        <tr>
+                            <td><?= $row["order_id"] ?></td>
+                            <td><?= $row["customer_name"] ?></td>
+                            <td><?= $row["create_date"] ?></td>
+                            <td><?= $row["employee_id"] ?></td>
+                        </tr>
+                    <?php endforeach;?>
                 </tbody>
             </table>
         </div>

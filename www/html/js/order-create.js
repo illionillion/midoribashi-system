@@ -2,6 +2,7 @@
 
     let rowCount = 0;
     let dataArray = []; // セル内のinputなどをバインドさせる？
+    let totalAmount = 0
 
     const addRow = () => {
         // テンプレコピー
@@ -46,6 +47,8 @@
                 document.getElementById("table-body").removeChild(childEle);
             }
         });
+        document.getElementById("table-data").value = JSON.stringify(dataArray.filter(Boolean)); // ここでnull削除
+        calcAmount()
         // dataArray = dataArray.filter((item, index) => {
         //     if (!item.checkbox) {
         //         return true
@@ -67,12 +70,37 @@
         console.log(dataArray);
         document.getElementById("table-data").value = JSON.stringify(dataArray);
 
+        if (["count", "unit-price"].includes(colName)) calcAmount()
+
+    }
+
+    const calcAmount = () => {
+        let amount = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            if (typeof dataArray[i] !== "undefined") amount += dataArray[i]["count"] * dataArray[i]["unit-price"]
+        }
+        totalAmount = amount
+        document.querySelector(".total-amount-view>span:nth-child(2)").textContent = totalAmount
+        document.getElementById("total-amount").value = totalAmount
+
+    }
+
+    const handlingSubmit = e => {
+        const result = window.confirm('注文書を作成しますか？');
+        if (!result) e.preventDefault(); // 「いいえ」の時は送信しない
+    }
+    const handlingCancel = e => {
+        const result = window.confirm('注文書を破棄しますか？');
+        if (!result) e.preventDefault(); // 「いいえ」の時は送信しない
     }
 
     const onLoad = () => {
         document.getElementById("add-row-button").addEventListener("click", addRow)
         document.getElementById("remove-row-button").addEventListener("click", removeRow)
+        document.getElementById("form-submit").addEventListener("click", handlingSubmit)
+        document.getElementById("form-cancel").addEventListener("click", handlingCancel)
     }
+
 
     window.addEventListener('load', onLoad)
 
