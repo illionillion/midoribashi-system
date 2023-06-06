@@ -2,6 +2,14 @@
 
 include './connect_db.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // GETリクエストの場合の処理（直接アクセスされた場合）
+
+    // 別のページにリダイレクト
+    header("Location: /");
+    exit;
+}
+
 session_start();
 
 // POSTデータを受け取る

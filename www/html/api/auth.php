@@ -3,6 +3,14 @@
 // データベースの接続
 include './connect_db.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // GETリクエストの場合の処理（直接アクセスされた場合）
+
+    // 別のページにリダイレクト
+    header("Location: /");
+    exit;
+}
+
 // フォームからのデータを受け取る
 $employeeId = $_POST['employee-id'];
 $password = $_POST['employee-password'];

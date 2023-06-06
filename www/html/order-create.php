@@ -16,6 +16,9 @@ include './api/session_check.php';
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/header.css">
     <style>
+        .left {
+            flex: 1;
+        }
         .right {
             font-size: 24px;
         }
@@ -63,19 +66,19 @@ include './api/session_check.php';
                 <form action="/api/order-create.php" method="post" class="d-flex">
                     <section class="left d-flex flex-column gap-3">
                         <section class="left-head d-flex gap-3">
-                            <section class="form-group d-flex flex-1 justify-content-center align-items-center">
+                            <section class="form-group d-flex justify-content-center align-items-center">
                                 <label for="customer-name" class="form-label w-25">
                                     <span class="label-text">顧客名</span>
                                 </label>
-                                <input type="text" name="customer-name" id="customer-name" class="form-control">
+                                <input type="text" name="customer-name" id="customer-name" class="form-control" require>
                                 <span class="sama">様</span>
                             </section>
-                            <section class="form-group d-flex flex-1 justify-content-center align-items-center">
+                            <!-- <section class="form-group d-flex justify-content-center align-items-center">
                                 <label for="create-date" class="form-label w-50">
                                     <span class="label-text">作成日</span>
                                 </label>
                                 <input type="date" name="create-date" id="create-date" class="form-control">
-                            </section>
+                            </section> -->
                         </section>
                         <section class="left-bottom">
                             <section class="form-group d-flex gap-3">

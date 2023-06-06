@@ -1,4 +1,4 @@
-<?php 
+<?php
 include './components/importComponents.php';
 include './api/connect_db.php';
 include './api/session_check.php';
@@ -7,14 +7,13 @@ include './api/session_check.php';
 try {
     $stmt = $pdo->prepare("SELECT order_id, customer_name, create_date, employee_id FROM orders");
     $stmt->execute();
-  
+
     // 結果の取得
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
-  } catch (PDOException $e) {
+} catch (PDOException $e) {
     // エラーが発生した場合の処理
     die("データの取得に失敗しました: " . $e->getMessage());
-  }
+}
 
 ?>
 
@@ -41,7 +40,7 @@ try {
 
     <main>
         <div class="container">
-            
+
             <div class="search-header">
                 <h1>注文一覧</h1>
                 <div class="search-box">
@@ -61,14 +60,14 @@ try {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($results as $row) :?>
+                    <?php foreach ($results as $row) : ?>
                         <tr>
                             <td><?= $row["order_id"] ?></td>
-                            <td><?= $row["customer_name"] ?></td>
+                            <td><a href="./order-edit.php?id=<?= $row["order_id"] ?>"><?= $row["customer_name"] ?></a></td>
                             <td><?= $row["create_date"] ?></td>
                             <td><?= $row["employee_id"] ?></td>
                         </tr>
-                    <?php endforeach;?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

@@ -3,6 +3,14 @@
 // データベースの接続
 include './connect_db.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // GETリクエストの場合の処理（直接アクセスされた場合）
+
+    // 別のページにリダイレクト
+    header("Location: /");
+    exit;
+}
+
 // アカウント作成（従業員登録）
 // null値や空白文字のチェック
 // if (empty($employeeId) || empty($employeeName) || empty($phoneNumber) || empty($email) || empty($password)) {

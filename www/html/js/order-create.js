@@ -4,7 +4,7 @@
     let dataArray = []; // セル内のinputなどをバインドさせる？
     let totalAmount = 0
 
-    const addRow = () => {
+    const addRow = (data) => {
         // テンプレコピー
         // template要素を取得
         const template = document.getElementById('table-row-template');
@@ -18,6 +18,14 @@
             clone.querySelector(`tr`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > input`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
+            
+        }
+        console.log(data);
+        if (data && !(data instanceof Event)) {
+            clone.querySelector(`tr > td > input[data-col="name"]`).value = data["name"];
+            clone.querySelector(`tr > td > input[data-col="count"]`).value = data["count"];
+            clone.querySelector(`tr > td > input[data-col="unit-price"]`).value = data["unit-price"];
+            clone.querySelector(`tr > td > input[data-col="application"]`).value = data["application"];
         }
 
         dataArray[rowCount] = {
@@ -99,8 +107,25 @@
         document.getElementById("remove-row-button").addEventListener("click", removeRow)
         document.getElementById("form-submit").addEventListener("click", handlingSubmit)
         document.getElementById("form-cancel").addEventListener("click", handlingCancel)
-    }
 
+        const tableData = document.getElementById('table-data').value
+        if (tableData !== "") {
+            // console.log("データあり、テーブル作成");
+            // console.log(tableData);
+            const data_arr = JSON.parse(tableData)
+            for (let i = 0; i < data_arr.length; i++) {
+                // console.log(data_arr[i]);
+                addRow(data_arr[i])
+            }
+            dataArray = data_arr;
+        }
+        const totalAmountStr = document.getElementById('total-amount').value
+        if (totalAmountStr !== "") {
+            totalAmount = parseInt(totalAmountStr);
+        }
+        
+    }
+    
 
     window.addEventListener('load', onLoad)
 
