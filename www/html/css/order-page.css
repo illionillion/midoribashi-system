@@ -1,0 +1,31 @@
+.left {
+    flex: 1;
+}
+.right {
+    font-size: 24px;
+}
+
+form {
+    justify-content: space-between;
+}
+
+#table-contents {
+    padding: 60px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+}
+.total-amount-view {
+    /* text-decoration: underline; */
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+}

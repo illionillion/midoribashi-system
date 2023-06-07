@@ -12,42 +12,10 @@ include './api/session_check.php';
     <title>緑橋書店システム</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/header.css">
-    <style>
-        .left {
-            flex: 1;
-        }
-        .right {
-            font-size: 24px;
-        }
-
-        form {
-            justify-content: space-between;
-        }
-
-        #table-contents {
-            padding: 60px 0px;
-            display: flex;
-            flex-direction: column;
-            gap: 23px;
-
-        }
-
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-        }
-        .total-amount-view {
-            /* text-decoration: underline; */
-            border-bottom: 1px solid #000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 10%;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/order-page.css">
     <script src="/js/order-create.js"></script>
 </head>
 
