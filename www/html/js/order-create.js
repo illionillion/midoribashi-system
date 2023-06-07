@@ -20,7 +20,7 @@
             clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
             
         }
-        console.log(data);
+        // console.log(data);
         if (data && !(data instanceof Event)) {
             clone.querySelector(`tr > td > input[data-col="name"]`).value = data["name"];
             clone.querySelector(`tr > td > input[data-col="count"]`).value = data["count"];
