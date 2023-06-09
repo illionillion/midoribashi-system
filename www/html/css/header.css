@@ -24,6 +24,8 @@ header a:hover {
 
 .navigation-bar {
     text-align: center;
+    display: flex;
+    gap: 20px;
 }
 
 .login-logout {

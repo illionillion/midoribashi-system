@@ -38,7 +38,7 @@ include './api/session_check.php';
                                 <label for="customer-name" class="form-label w-25">
                                     <span class="label-text">顧客名</span>
                                 </label>
-                                <input type="text" name="customer-name" id="customer-name" class="form-control" require>
+                                <input type="text" name="customer-name" id="customer-name" class="form-control" required>
                                 <span class="sama">様</span>
                             </section>
                             <!-- <section class="form-group d-flex justify-content-center align-items-center">

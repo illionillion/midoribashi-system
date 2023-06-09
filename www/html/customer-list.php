@@ -1,20 +1,18 @@
 <?php
+// データベースの接続などの設定
 include './components/importComponents.php';
 include './api/connect_db.php';
 include './api/session_check.php';
 
-// SELECT文の実行
+// 注文テーブルから顧客名を取得
 try {
-    $stmt = $pdo->prepare("SELECT order_id, customer_name, create_date, employee_id FROM orders");
+    // $stmt = $pdo->prepare("SELECT DISTINCT customer_name FROM orders");
+    $stmt = $pdo->prepare("SELECT customer_name, SUM(total_amount) AS total_amount_sum FROM orders GROUP BY customer_name");
     $stmt->execute();
-
-    // 結果の取得
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // エラーが発生した場合の処理
     die("データの取得に失敗しました: " . $e->getMessage());
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -42,30 +40,38 @@ try {
         <div class="container">
 
             <div class="search-header">
-                <h1>注文一覧</h1>
+                <h1>顧客一覧</h1>
                 <div class="search-box">
                     <input type="search" class="search-input" placeholder="Search...">
                     <input type="submit" value="検索" class="btn btn-primary" />
-                    <a class="create-button btn btn-success" href="/order-create.php">注文書作成</a>
+                    <a class="create-button btn btn-success" href="#">顧客登録</a>
                 </div>
             </div>
 
             <table>
                 <thead>
                     <tr>
-                        <th>注文ID</th>
+                        <th>顧客ID</th>
                         <th>顧客名</th>
-                        <th>作成日</th>
-                        <th>登録者</th>
+                        <th>郵便番号</th>
+                        <th>住所</th>
+                        <th>電話番号</th>
+                        <th>FAX</th>
+                        <th>累計売上額</th>
+                        <th>リードタイム</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($results as $row) : ?>
+                    <?php foreach ($customers as $i => $customer) : ?>
                         <tr>
-                            <td><?= $row["order_id"] ?></td>
-                            <td><a href="./order-edit.php?id=<?= $row["order_id"] ?>"><?= $row["customer_name"] ?></a></td>
-                            <td><?= $row["create_date"] ?></td>
-                            <td><?= $row["employee_id"] ?></td>
+                            <td><?= $i + 1 ?></td>
+                            <td><a href="#?id=<?= -1 ?>"><?= $customer["customer_name"] ?></a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><?= floor($customer["total_amount_sum"] )?></td>
+                            <td></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

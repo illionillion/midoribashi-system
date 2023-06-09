@@ -18,7 +18,7 @@
             clone.querySelector(`tr`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > input`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
-            
+
         }
         // console.log(data);
         if (data && !(data instanceof Event)) {
@@ -101,12 +101,50 @@
         const result = window.confirm('注文書を破棄しますか？');
         if (!result) e.preventDefault(); // 「いいえ」の時は送信しない
     }
+    const handlingDelete = () => {
+        const result = window.confirm('本当に注文書を取り消しますか？');
+        if (!result) return; // 「いいえ」の時は送信しない
+
+        // formを生成して送信
+        // フォームの生成と送信処理
+        // フォーム要素を作成
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/api/order-delete.php';
+
+        // パラメーターの設定
+        const orderId = document.createElement('input');
+        orderId.type = 'hidden';
+        orderId.name = 'order-id';
+        orderId.value = document.getElementById('order-id').value; // 削除する注文のID
+
+        // フォームにパラメーターを追加
+        form.appendChild(orderId);
+
+        // フォームを一時的にDOMに追加
+        document.body.appendChild(form);
+
+        // フォームを送信
+        form.submit();
+
+        // 送信後、フォームを削除
+        document.body.removeChild(form);
+    }
+    const handlingDelivery = () => {
+        const result = window.confirm('本当に納品しますか？');
+        if (!result) return; // 「いいえ」の時は送信しない
+
+        // 納品書を画面上で作成して表示？
+        // PDFビューワー？
+    }
 
     const onLoad = () => {
         document.getElementById("add-row-button").addEventListener("click", addRow)
         document.getElementById("remove-row-button").addEventListener("click", removeRow)
         document.getElementById("form-submit").addEventListener("click", handlingSubmit)
         document.getElementById("form-cancel").addEventListener("click", handlingCancel)
+        document.getElementById("order-delete")?.addEventListener("click", handlingDelete)
+        document.getElementById("order-delivery")?.addEventListener("click", handlingDelivery)
 
         const tableData = document.getElementById('table-data').value
         if (tableData !== "") {
@@ -123,9 +161,9 @@
         if (totalAmountStr !== "") {
             totalAmount = parseInt(totalAmountStr);
         }
-        
+
     }
-    
+
 
     window.addEventListener('load', onLoad)
 

@@ -60,7 +60,7 @@ if ($order) {
                                 <label for="customer-name" class="form-label w-25">
                                     <span class="label-text">顧客名</span>
                                 </label>
-                                <input type="text" name="customer-name" id="customer-name" class="form-control" value="<?= $order['customer_name'] ?>" require>
+                                <input type="text" name="customer-name" id="customer-name" class="form-control" value="<?= $order['customer_name'] ?>" required>
                                 <span class="sama">様</span>
                             </section>
                             <section class="form-group d-flex justify-content-center align-items-center">
@@ -79,9 +79,15 @@ if ($order) {
                             </section>
                         </section>
                     </section>
-                    <section class="right">
-                        <a href="/" id="form-cancel" class="btn btn-secondary py-2 px-5">変更を破棄</a>
-                        <input type="submit" id="form-submit" value="更新" class="btn btn-success py-2 px-5">
+                    <section class="right d-flex flex-column gap-2">
+                        <div>
+                            <a href="/" id="form-cancel" class="btn btn-secondary py-2 px-5">変更を破棄</a>
+                            <input type="submit" id="form-submit" value="更新" class="btn btn-success py-2 px-5">
+                        </div>
+                        <div>
+                            <input type="button" id="order-delete" value="注文取消し" class="btn btn-danger py-2 px-5">
+                            <input type="button" id="order-delivery" value="納品" class="btn btn-primary py-2 px-5">
+                        </div>
                     </section>
                     <input type="hidden" name="table-data" id="table-data" value='<?= $order['table_data'] ?>'>
                     <input type="hidden" name="total-amount" id="total-amount" value="<?= floor($order['total_amount']) ?>">

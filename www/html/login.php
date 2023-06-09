@@ -1,4 +1,14 @@
-<?php include './components/importComponents.php' ?>
+<?php
+include './components/importComponents.php';
+// セッションの開始
+session_start();
+
+// セッションにemployee_idが存在するかチェック
+if (isset($_SESSION['employee_id'])) {
+    header("Location: /");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
