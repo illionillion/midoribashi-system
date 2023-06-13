@@ -87,7 +87,7 @@ if ($order) {
                         </div>
                     </section>
                     <input type="hidden" name="table-data" id="table-data" value='<?= $order['table_data'] ?>'>
-                    <input type="hidden" name="completed-amount" id="completed-amount" value="<?= floor($order['total_amount']) ?>">
+                    <input type="hidden" name="completed-amount" id="completed-amount" value="">
                     <input type="hidden" name="order-id" id="order-id" value="<?= $orderId ?>">
                 </form>
             </section>
@@ -125,7 +125,7 @@ if ($order) {
                         <td><p data-row-num="" data-col="count" alt="数量"></p></td>
                         <td><p data-row-num="" data-col="unit-price" alt="単価"></p></td>
                         <td><p data-row-num="" data-col="application" alt="適用"></p></td>
-                        <td><input type="checkbox" data-row-num="" data-col="checkbox" class=""></td>
+                        <td><input type="checkbox" data-row-num="" data-col="isDelivery" class=""></td>
                     </tr>
                 </template>
             </section>

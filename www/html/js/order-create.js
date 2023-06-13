@@ -32,17 +32,21 @@
             clone.querySelector(`tr > td > input[data-col="count"]`).value = data["count"];
             clone.querySelector(`tr > td > input[data-col="unit-price"]`).value = data["unit-price"];
             clone.querySelector(`tr > td > input[data-col="application"]`).value = data["application"];
+            clone.querySelector(`tr > td > input[data-col="application"]`).value = data["application"];
+            clone.querySelector(`tr > td > p[data-col="isDelivery"]`).textContent = data["isDelivery"] ? "納品済" : "未納品";
+            clone.querySelector(`tr > td > p[data-col="isDelivery"]`).style.color = data["isDelivery"] ? "#f00" : "#000";
+        } else {
+            // ここも変えるべき？
+            dataArray[rowCount] = {
+                "name": "",
+                "count": "1",
+                "unit-price": "0",
+                "application": "",
+                "checkbox": false,
+                "isDelivery": false
+            };
         }
 
-        // ここも変えるべき？
-        dataArray[rowCount] = {
-            "name": "",
-            "count": "1",
-            "unit-price": "0",
-            "application": "",
-            "checkbox": false,
-            "isDelivery": false
-        };
 
         // div(id="container")の中に追加
         document.getElementById('table-body').appendChild(clone);
@@ -186,11 +190,11 @@
             // console.log("データあり、テーブル作成");
             // console.log(tableData);
             const data_arr = JSON.parse(tableData)
+            dataArray = data_arr;
             for (let i = 0; i < data_arr.length; i++) {
                 // console.log(data_arr[i]);
                 addRow(data_arr[i])
             }
-            dataArray = data_arr;
         }
         const totalAmountStr = document.getElementById('total-amount').value
         if (totalAmountStr !== "") {

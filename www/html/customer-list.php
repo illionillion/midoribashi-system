@@ -7,7 +7,12 @@ include './api/session_check.php';
 // 注文テーブルから顧客名を取得
 try {
     // $stmt = $pdo->prepare("SELECT DISTINCT customer_name FROM orders");
-    $stmt = $pdo->prepare("SELECT customer_name, SUM(total_amount) AS total_amount_sum FROM orders GROUP BY customer_name");
+    // $stmt = $pdo->prepare("SELECT customer_name, SUM(total_amount) AS total_amount_sum FROM orders GROUP BY customer_name");
+    $stmt = $pdo->prepare("SELECT customer_name,
+     SUM(total_amount) AS total_amount_sum, 
+     AVG(DATEDIFF(delivery_date, create_date)) AS average_lead_time 
+     FROM orders GROUP BY customer_name;
+    ");
     $stmt->execute();
     $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -70,8 +75,8 @@ try {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><?= floor($customer["total_amount_sum"] )?></td>
-                            <td></td>
+                            <td><?= floor($customer["total_amount_sum"]) ?></td>
+                            <td><?= $customer["average_lead_time"] ? floor($customer["average_lead_time"]) : "-" ?>日</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

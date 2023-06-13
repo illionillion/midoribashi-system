@@ -2,8 +2,11 @@
 
     let dataArray = [];
     let rowCount = 0;
+    let totalAmount = 0;
+    let totalAmountDiff = 0;
 
     const addRow = (data) => {
+        if(data["isDelivery"]) return
         // template要素を取得
         const template = document.getElementById('table-row-template');
 
@@ -15,7 +18,7 @@
         for (let i = 2; i <= 6; i++) {
             clone.querySelector(`tr`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > :first-child`).dataset.rowNum = rowCount;
-            // clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
+            if(i===6) clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
         }
         // console.log(data);
         if (data && !(data instanceof Event)) { // 更新画面の時
@@ -23,15 +26,18 @@
             clone.querySelector(`tr > td > p[data-col="count"]`).textContent = data["count"];
             clone.querySelector(`tr > td > p[data-col="unit-price"]`).textContent = data["unit-price"];
             clone.querySelector(`tr > td > p[data-col="application"]`).textContent = data["application"];
+            // if(data["isDelivery"]) {
+            //     clone.querySelector(`tr`).style.display = 'none'
+            // }
         }
 
-        dataArray[rowCount] = {
-            "name": "",
-            "count": "1",
-            "unit-price": "0",
-            "application": "",
-            "checkbox": false
-        };
+        // dataArray[rowCount] = {
+        //     "name": "",
+        //     "count": "1",
+        //     "unit-price": "0",
+        //     "application": "",
+        //     "checkbox": false
+        // };
 
         // div(id="container")の中に追加
         document.getElementById('table-body').appendChild(clone);
@@ -42,18 +48,39 @@
         rowCount++;
     }
 
-    // const onChangeInput = (e) => {
-    //     const colName = e.target.dataset.col
-    //     const rowNum = e.target.dataset.rowNum
+    const onChangeInput = (e) => {
+        const colName = e.target.dataset.col
+        const rowNum = e.target.dataset.rowNum
 
-    //     dataArray[rowNum][colName] = colName !== "checkbox" ? e.target.value : e.target.checked
+        dataArray[rowNum][colName] = colName !== "isDelivery" ? e.target.value : e.target.checked
 
-    //     console.log(dataArray);
-    //     document.getElementById("table-data").value = JSON.stringify(dataArray);
+        console.log(dataArray);
+        document.getElementById("table-data").value = JSON.stringify(dataArray);
 
-    //     if (["count", "unit-price"].includes(colName)) calcAmount()
+        calcAmount()
 
-    // }
+        // if (["count", "unit-price"].includes(colName)) calcAmount()
+
+    }
+
+    const calcAmount = () => {
+        let amount = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            if (typeof dataArray[i] !== "undefined" && dataArray[i]["isDelivery"]) amount += dataArray[i]["count"] * dataArray[i]["unit-price"]
+        }
+        console.log(totalAmountDiff);
+        totalAmount = amount //- totalAmountDiff
+        document.querySelector(".total-amount-view>span:nth-child(2)").textContent = totalAmount
+        document.getElementById("completed-amount").value = totalAmount
+    }
+    const calcAmountDiff = () => {
+        let amount = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            if (typeof dataArray[i] !== "undefined" && dataArray[i]["isDelivery"]) amount += dataArray[i]["count"] * dataArray[i]["unit-price"]
+        }
+        console.log(amount);
+        totalAmountDiff = amount
+    }
 
     const handlingSubmit = e => {
         const result = window.confirm('納品書を作成しますか？');
@@ -69,15 +96,17 @@
         document.getElementById("form-cancel")?.addEventListener("click", handlingCancel)
 
         const tableData = document.getElementById('table-data').value
+        console.log(tableData);
         if (tableData !== "") {
             // console.log("データあり、テーブル作成");
             // console.log(tableData);
             const data_arr = JSON.parse(tableData)
+            dataArray = data_arr;
+            calcAmountDiff()
             for (let i = 0; i < data_arr.length; i++) {
                 // console.log(data_arr[i]);
                 addRow(data_arr[i])
             }
-            dataArray = data_arr;
         }
         // const totalAmountStr = document.getElementById('total-amount').value
         // if (totalAmountStr !== "") {

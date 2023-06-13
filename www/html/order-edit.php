@@ -129,7 +129,7 @@ if ($order) {
                         <td><input type="number" data-row-num="" data-col="count" class="form-control" min="1" value="1" placeholder="数量"></td>
                         <td><input type="number" data-row-num="" data-col="unit-price" class="form-control" min="0" value="0" placeholder="単価"></td>
                         <td><input type="text" data-row-num="" data-col="application" class="form-control" placeholder="適用"></td>
-                        <td>未納品</td>
+                        <td><p data-col="isDelivery">未納品</p></td>
                         <td><input type="checkbox" data-row-num="" data-col="checkbox" class=""></td>
                     </tr>
                 </template>
