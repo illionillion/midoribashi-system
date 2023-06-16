@@ -5,8 +5,11 @@
     let totalAmount = 0;
     let totalAmountDiff = 0;
 
-    const addRow = (data) => {
-        if(data["isDelivery"]) return
+    const addRow = (data, index) => {
+        if(data["isDelivery"]) {
+            rowCount++;
+            return
+        }
         // template要素を取得
         const template = document.getElementById('table-row-template');
 
@@ -69,7 +72,7 @@
             if (typeof dataArray[i] !== "undefined" && dataArray[i]["isDelivery"]) amount += dataArray[i]["count"] * dataArray[i]["unit-price"]
         }
         console.log(totalAmountDiff);
-        totalAmount = amount //- totalAmountDiff
+        totalAmount = amount - totalAmountDiff
         document.querySelector(".total-amount-view>span:nth-child(2)").textContent = totalAmount
         document.getElementById("completed-amount").value = totalAmount
     }
@@ -105,7 +108,7 @@
             calcAmountDiff()
             for (let i = 0; i < data_arr.length; i++) {
                 // console.log(data_arr[i]);
-                addRow(data_arr[i])
+                addRow(data_arr[i], i)
             }
         }
         // const totalAmountStr = document.getElementById('total-amount').value
