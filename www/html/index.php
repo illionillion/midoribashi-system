@@ -5,6 +5,15 @@ include './api/session_check.php';
 
 // SELECT文の実行
 try {
+
+    if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
+        echo "<script>console.log('search_textはあります')</script>";
+        // ここで検索処理
+    } else {
+        echo "<script>console.log('search_textはありません')</script>";
+        // ここで普通に一覧取得処理
+    }
+
     $stmt = $pdo->prepare("SELECT order_id, customer_name, create_date, employee_id FROM orders");
     $stmt->execute();
 
@@ -43,11 +52,11 @@ try {
 
             <div class="search-header">
                 <h1>注文一覧</h1>
-                <div class="search-box">
-                    <input type="search" class="search-input" placeholder="Search...">
+                <form action="/index.php" method="get" class="search-box">
+                    <input type="search" name="search_text" class="search-input" placeholder="Search...">
                     <input type="submit" value="検索" class="btn btn-primary" />
                     <a class="create-button btn btn-success" href="/order-create.php">注文書作成</a>
-                </div>
+                </form>
             </div>
 
             <table>
