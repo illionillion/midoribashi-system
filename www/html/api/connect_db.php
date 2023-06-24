@@ -1,5 +1,13 @@
 <?php
-$host = 'localhost'; // データベースのホスト名
+session_start();
+// $host = 'localhost'; // データベースのホスト名
+if (getenv('DOCKER_ENV')) {
+    // Docker Compose環境の場合
+    $host = 'db'; // Docker Composeのサービス名を指定
+} else {
+    // ローカル環境（XAMPPなど）の場合
+    $host = 'localhost'; // ローカルホストを指定
+}
 $dbname = 'midoribashi_db'; // データベース名
 $username = 'root'; // ユーザー名
 $password = ''; // パスワード

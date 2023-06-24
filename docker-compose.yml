@@ -9,6 +9,8 @@ services:
       - ./www/html:/var/www/html
     depends_on:
       - php
+    environment:
+      - DOCKER_ENV=true
 
   php:
     build: ./php
@@ -16,6 +18,8 @@ services:
       - ./www/html:/var/www/html
     depends_on:
       - db
+    environment:
+      - DOCKER_ENV=true
 
   db:
     platform: linux/x86_64
