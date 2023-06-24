@@ -1,8 +1,8 @@
 <?php
 
-include './api/session_check.php';
 include './components/importComponents.php';
 include './api/connect_db.php';
+include './api/session_check.php';
 
 // 注文IDの取得
 $orderId = $_POST['order-id'];
