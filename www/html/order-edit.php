@@ -23,6 +23,12 @@ if ($order) {
     echo "指定された注文は存在しません。";
 }
 
+if (isset($_GET['error']) && !empty($_GET['error'])) {
+    $error_flag = true;
+} else {
+    $error_flag = false;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +100,12 @@ if ($order) {
                     <input type="hidden" name="order-id" id="order-id" value="<?= $_GET['id'] ?>">
                 </form>
             </section>
-
+            <section class="form-group d-flex justify-content-center align-items-center py-4 px-2">
+                <?php if($error_flag) : ?>
+                    <div class="text-danger">注文登録に失敗しました。同じ顧客名が登録されている可能性があります。</div>
+                <?php endif; ?>
+            </section>
+            
             <section id="table-contents">
                 <section class="table-controls">
                     <div class="buttons">

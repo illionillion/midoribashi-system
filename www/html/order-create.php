@@ -1,6 +1,13 @@
 <?php 
 include './components/importComponents.php';
 include './api/session_check.php';
+
+if (isset($_GET['error']) && !empty($_GET['error'])) {
+    $error_flag = true;
+} else {
+    $error_flag = false;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,12 +48,6 @@ include './api/session_check.php';
                                 <input type="text" name="customer-name" id="customer-name" class="form-control" required>
                                 <span class="sama">様</span>
                             </section>
-                            <!-- <section class="form-group d-flex justify-content-center align-items-center">
-                                <label for="create-date" class="form-label w-50">
-                                    <span class="label-text">作成日</span>
-                                </label>
-                                <input type="date" name="create-date" id="create-date" class="form-control">
-                            </section> -->
                         </section>
                         <section class="left-bottom">
                             <section class="form-group d-flex gap-3">
@@ -64,6 +65,11 @@ include './api/session_check.php';
                     <input type="hidden" name="table-data" id="table-data">
                     <input type="hidden" name="total-amount" id="total-amount">
                 </form>
+            </section>
+            <section class="form-group d-flex justify-content-center align-items-center py-4 px-2">
+                <?php if($error_flag) : ?>
+                    <div class="text-danger">注文登録に失敗しました。同じ顧客名が登録されている可能性があります。</div>
+                <?php endif; ?>
             </section>
 
             <section id="table-contents">

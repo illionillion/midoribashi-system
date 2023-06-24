@@ -30,7 +30,7 @@ try {
     exit;
 } catch (PDOException $e) {
     // エラーが発生した場合の処理
+    header("Location: /order-edit.php?id=".$orderId."&error=1");
     die("注文書の作成に失敗しました: " . $e->getMessage());
-    // header("Location: /order-create.php");
     exit;
 }
