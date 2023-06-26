@@ -5,6 +5,16 @@
     let totalAmount = 0;
     let mode = "create";
 
+    const getCurrentDate = () => {
+        const date = new Date();
+
+        const yyyy = date.getFullYear();
+        const mm = ("0" + (date.getMonth() + 1)).slice(-2);
+        const dd = ("0" + date.getDate()).slice(-2);
+
+        return yyyy + '-' + mm + '-' + dd;
+    }
+
     const addRow = (data) => {
         // テンプレコピー
         // template要素を取得
@@ -15,10 +25,10 @@
 
         // 行内の各列にイベント付与する処理をしたい
         clone.querySelector("tr > td:nth-child(1)").innerHTML = rowCount + 1;
-        for (let i = 2; i <= 6; i++) {
+        for (let i = 2; i <= 7; i++) {
             clone.querySelector(`tr`).dataset.rowNum = rowCount;
             console.log(mode);
-            if (mode === "edit" && i === 6) {
+            if (mode === "edit" && i === 7) {
                 clone.querySelector(`tr > td:nth-child(${i + 1}) > input`).dataset.rowNum = rowCount;
                 clone.querySelector(`tr > td:nth-child(${i + 1}) > input`).addEventListener("change", onChangeInput);
             } else {
@@ -35,6 +45,7 @@
             clone.querySelector(`tr > td > input[data-col="application"]`).value = data["application"];
             clone.querySelector(`tr > td > p[data-col="isDelivery"]`).textContent = data["isDelivery"] ? "納品済" : "未納品";
             clone.querySelector(`tr > td > p[data-col="isDelivery"]`).style.color = data["isDelivery"] ? "#f00" : "#000";
+            clone.querySelector("tr > td > input[data-col='order-date']").value = data["order-date"];
         } else {
             // ここも変えるべき？
             dataArray[rowCount] = {
@@ -42,9 +53,12 @@
                 "count": "1",
                 "unit-price": "0",
                 "application": "",
+                "order-date": getCurrentDate(),
+                "delivery-date": "",
                 "checkbox": false,
                 "isDelivery": false
             };
+            clone.querySelector("tr > td > input[data-col='order-date']").value = getCurrentDate();
         }
 
 

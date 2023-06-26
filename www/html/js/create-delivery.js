@@ -5,6 +5,16 @@
     let totalAmount = 0;
     let totalAmountDiff = 0;
 
+    const getCurrentDate = () => {
+        const date = new Date();
+
+        const yyyy = date.getFullYear();
+        const mm = ("0" + (date.getMonth() + 1)).slice(-2);
+        const dd = ("0" + date.getDate()).slice(-2);
+
+        return yyyy + '-' + mm + '-' + dd;
+    }
+
     const addRow = (data, index) => {
         if(data["isDelivery"]) {
             rowCount++;
@@ -18,10 +28,10 @@
 
         // 行内の各列にイベント付与する処理をしたい
         clone.querySelector("tr > td:nth-child(1)").innerHTML = rowCount + 1;
-        for (let i = 2; i <= 6; i++) {
+        for (let i = 2; i <= 7; i++) {
             clone.querySelector(`tr`).dataset.rowNum = rowCount;
             clone.querySelector(`tr > td:nth-child(${i}) > :first-child`).dataset.rowNum = rowCount;
-            if(i===6) clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
+            if(i===7) clone.querySelector(`tr > td:nth-child(${i}) > input`).addEventListener("change", onChangeInput);
         }
         // console.log(data);
         if (data && !(data instanceof Event)) { // 更新画面の時
@@ -29,6 +39,7 @@
             clone.querySelector(`tr > td > p[data-col="count"]`).textContent = data["count"];
             clone.querySelector(`tr > td > p[data-col="unit-price"]`).textContent = data["unit-price"];
             clone.querySelector(`tr > td > p[data-col="application"]`).textContent = data["application"];
+            clone.querySelector(`tr > td > p[data-col="order-date"]`).textContent = data["order-date"].replaceAll('-', '/');
             // if(data["isDelivery"]) {
             //     clone.querySelector(`tr`).style.display = 'none'
             // }
@@ -55,7 +66,9 @@
         const colName = e.target.dataset.col
         const rowNum = e.target.dataset.rowNum
 
-        dataArray[rowNum][colName] = colName !== "isDelivery" ? e.target.value : e.target.checked
+        // dataArray[rowNum][colName] = colName !== "isDelivery" ? e.target.value : e.target.checked
+        dataArray[rowNum]["isDelivery"] = e.target.checked
+        dataArray[rowNum]["delivery-date"] = e.target.checked ? getCurrentDate() : "";
 
         console.log(dataArray);
         document.getElementById("table-data").value = JSON.stringify(dataArray);

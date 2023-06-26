@@ -10,7 +10,8 @@ try {
     // $stmt = $pdo->prepare("SELECT customer_name, SUM(total_amount) AS total_amount_sum FROM orders GROUP BY customer_name");
     $stmt = $pdo->prepare("SELECT customer_name,
      SUM(total_amount) AS total_amount_sum, 
-     AVG(DATEDIFF(delivery_date, create_date)) AS average_lead_time 
+     AVG(DATEDIFF(delivery_date, create_date)) AS average_lead_time,
+     table_data
      FROM orders GROUP BY customer_name;
     ");
     $stmt->execute();
@@ -18,6 +19,35 @@ try {
 } catch (PDOException $e) {
     die("データの取得に失敗しました: " . $e->getMessage());
 }
+
+function get_read_time ($data) {
+    $arr = json_decode($data);
+    $totalReadTime = 0;
+    $orderCount = count($arr);
+    $deliveryDateFlag = true; // 全部データがなかったらtrue
+    foreach ($arr as $item) {
+        $orderDate = new DateTime($item->{"order-date"});
+        $deliveryDate = new DateTime($item->{"delivery-date"});
+        $readTime = $deliveryDate->diff($orderDate)->format("%a");
+        $totalReadTime += $readTime;
+
+        // echo $item->{"delivery-date"};
+        // if ($item->{"delivery-date"} !== "") { // 1個でもデータがあればfalse
+        //     $deliveryDate = false;
+        // }
+    }
+    
+    // if($orderCount < 1 || $deliveryDateFlag) {
+    if($orderCount < 1) {
+        return ' - ';
+    }
+
+    $averageReadTime = $totalReadTime / $orderCount;
+    
+
+    return $averageReadTime;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +106,10 @@ try {
                             <td></td>
                             <td></td>
                             <td><?= floor($customer["total_amount_sum"]) ?></td>
-                            <td><?= $customer["average_lead_time"] ? floor($customer["average_lead_time"]) : "-" ?>日</td>
+                            <td><?=
+                                get_read_time($customer["table_data"]);
+                                // $customer["average_lead_time"] ? floor($customer["average_lead_time"]) : "-" 
+                                ?>日</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

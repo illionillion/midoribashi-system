@@ -112,6 +112,7 @@ if ($order) {
                             <th>数量</th>
                             <th>単価</th>
                             <th>適用</th>
+                            <th>注文日</th>
                             <th>納品</th>
                         </tr>
                     </thead>
@@ -125,6 +126,7 @@ if ($order) {
                         <td><p data-row-num="" data-col="count" alt="数量"></p></td>
                         <td><p data-row-num="" data-col="unit-price" alt="単価"></p></td>
                         <td><p data-row-num="" data-col="application" alt="適用"></p></td>
+                        <td><p data-row-num="" data-col="order-date" alt="注文日"></p></td>
                         <td><input type="checkbox" data-row-num="" data-col="isDelivery" class=""></td>
                     </tr>
                 </template>

@@ -126,6 +126,7 @@ if (isset($_GET['error']) && !empty($_GET['error'])) {
                             <th>数量</th>
                             <th>単価</th>
                             <th>適用</th>
+                            <th>注文日</th>
                             <th>納品</th>
                             <th></th>
                         </tr>
@@ -140,6 +141,7 @@ if (isset($_GET['error']) && !empty($_GET['error'])) {
                         <td><input type="number" data-row-num="" data-col="count" class="form-control" min="1" value="1" placeholder="数量"></td>
                         <td><input type="number" data-row-num="" data-col="unit-price" class="form-control" min="0" value="0" placeholder="単価"></td>
                         <td><input type="text" data-row-num="" data-col="application" class="form-control" placeholder="適用"></td>
+                        <td><input type="date" data-row-num="" data-col="order-date" class="form-control" placeholder="注文日"></td>
                         <td><p data-col="isDelivery">未納品</p></td>
                         <td><input type="checkbox" data-row-num="" data-col="checkbox" class=""></td>
                     </tr>
