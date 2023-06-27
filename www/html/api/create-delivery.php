@@ -16,14 +16,17 @@ session_start();
 // $customerName = $_POST['customer-name'];
 // $remarks = $_POST['remarks'];
 $tableData = $_POST['table-data'];
+$deliveryData = $_POST['delivery-data'];
 $employeeId = $_SESSION['employee_id'];
 // $totalAmount = $_POST['total-amount'];
 $orderId = $_POST['order-id'];
 
-// INSERT文の実行
 try {
     $stmt = $pdo->prepare("UPDATE orders SET table_data = ?, employee_id = ?, delivery_date = CURDATE() WHERE order_id = ?");
     $stmt->execute([$tableData, $employeeId, $orderId]);
+
+    // ここで納品テーブルに納品データを保存（いつ、どの顧客の、どの商品が納品されたか）
+    
 
     // 成功した場合の処理（例: メッセージを表示）
     //   echo "注文書を正常に作成しました。";

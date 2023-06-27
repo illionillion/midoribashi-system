@@ -14,7 +14,7 @@ try {
         // ここで普通に一覧取得処理
     }
 
-    $stmt = $pdo->prepare("SELECT order_id, customer_name, create_date, employee_id FROM orders");
+    $stmt = $pdo->prepare("SELECT order_id, customer_name, employee_id, table_data FROM orders");
     $stmt->execute();
 
     // 結果の取得
@@ -22,6 +22,20 @@ try {
 } catch (PDOException $e) {
     // エラーが発生した場合の処理
     die("データの取得に失敗しました: " . $e->getMessage());
+}
+
+function is_delivery($data) {
+    $arr = json_decode($data);
+    $unpaidFlag = false; // 未納フラグ
+
+    foreach ($arr as $item) {
+        if (!$item->{"isDelivery"}) {
+            $unpaidFlag = true;
+        }
+    }
+
+    return $unpaidFlag ? "未納あり" : "未納なし";
+
 }
 
 ?>
@@ -64,7 +78,7 @@ try {
                     <tr>
                         <th>注文ID</th>
                         <th>顧客名</th>
-                        <th>作成日</th>
+                        <th>納品</th>
                         <th>登録者</th>
                     </tr>
                 </thead>
@@ -73,7 +87,7 @@ try {
                         <tr>
                             <td><?= $row["order_id"] ?></td>
                             <td><a href="./order-edit.php?id=<?= $row["order_id"] ?>"><?= $row["customer_name"] ?></a></td>
-                            <td><?= $row["create_date"] ?></td>
+                            <td><?= is_delivery($row["table_data"]) ?></td>
                             <td><?= $row["employee_id"] ?></td>
                         </tr>
                     <?php endforeach; ?>

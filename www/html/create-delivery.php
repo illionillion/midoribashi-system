@@ -87,6 +87,7 @@ if ($order) {
                         </div>
                     </section>
                     <input type="hidden" name="table-data" id="table-data" value='<?= $order['table_data'] ?>'>
+                    <input type="hidden" name="delivery-data" id="delivery-data" value=''>
                     <input type="hidden" name="completed-amount" id="completed-amount" value="">
                     <input type="hidden" name="order-id" id="order-id" value="<?= $orderId ?>">
                 </form>

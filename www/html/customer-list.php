@@ -45,7 +45,7 @@ function get_read_time ($data) {
     $averageReadTime = $totalReadTime / $orderCount;
     
 
-    return $averageReadTime;
+    return floor($averageReadTime * 100) / 100;
 }
 
 ?>

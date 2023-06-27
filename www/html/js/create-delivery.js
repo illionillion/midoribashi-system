@@ -1,6 +1,7 @@
 (() => {
 
     let dataArray = [];
+    let deliveryData = [];
     let rowCount = 0;
     let totalAmount = 0;
     let totalAmountDiff = 0;
@@ -70,7 +71,12 @@
         dataArray[rowNum]["isDelivery"] = e.target.checked
         dataArray[rowNum]["delivery-date"] = e.target.checked ? getCurrentDate() : "";
 
+        deliveryData[rowNum] = e.target.checked ? Object.assign(dataArray[rowNum], {}) : undefined
+
+        console.log(deliveryData);
         console.log(dataArray);
+
+        document.getElementById("delivery-data").value = JSON.stringify(deliveryData.filter(Boolean));
         document.getElementById("table-data").value = JSON.stringify(dataArray);
 
         calcAmount()
