@@ -3,7 +3,7 @@
     <nav class="navigation-bar">
         <a href="/">注文一覧</a>
         <a href="/customer-list.php">顧客一覧</a>
-        <a href="#">従業員一覧</a>
+        <a href="/employees-list.php">従業員一覧</a>
         <!-- <a href="#">Link 2</a>
         <a href="#">Link 3</a> -->
     </nav>
