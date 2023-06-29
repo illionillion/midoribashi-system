@@ -76,11 +76,11 @@ function get_read_time ($data) {
 
             <div class="search-header">
                 <h1>顧客一覧</h1>
-                <div class="search-box">
-                    <input type="search" class="search-input" placeholder="Search...">
+                <form class="search-box" action="/customer-list.php" method="get">
+                    <input type="search" name="search_text" class="search-input" placeholder="Search...">
                     <input type="submit" value="検索" class="btn btn-primary" />
                     <a class="create-button btn btn-success" href="#">顧客登録</a>
-                </div>
+                </form>
             </div>
 
             <table>
