@@ -34,3 +34,8 @@
 
 # テーブル作成用のSQL
 !/contact_db.sql
+
+# 画像・PDF
+*.pdf
+*.jpeg
+*.png
