@@ -39,3 +39,5 @@
 *.pdf
 *.jpeg
 *.png
+
+!db-recovery.sql
